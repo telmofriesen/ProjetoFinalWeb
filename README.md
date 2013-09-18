@@ -3,10 +3,6 @@ ProjetoFinalWeb
 
 Criar uma aplicação em JSF, com acesso a banco de dados via JPA 2.0 e consultas usando a API de critérios. A aplicação em um recurso para apreciadores de música onde um usuário qualquer pode consultar e/ou cadastrar artistas, álbuns e faixas.
 Existem dois perfis de usuários: administrador e colaborador. O administrador pode realizar qualquer modificação em qualquer registro, enquanto o colaborador somente poderá alterar os registros criados por ele.
-A aplicação deve prever o cadastro de usuários. Um usuário será autenticado pelo e-mail e senha. 
-
-Criar uma aplicação em JSF, com acesso a banco de dados via JPA 2.0 e consultas usando a API de critérios. A aplicação em um recurso para apreciadores de música onde um usuário qualquer pode consultar e/ou cadastrar artistas, álbuns e faixas.
-Existem dois perfis de usuários: administrador e colaborador. O administrador pode realizar qualquer modificação em qualquer registro, enquanto o colaborador somente poderá alterar os registros criados por ele.
 
 A aplicação deve prever o cadastro de usuários. Um usuário será autenticado pelo e-mail e senha. 
 
