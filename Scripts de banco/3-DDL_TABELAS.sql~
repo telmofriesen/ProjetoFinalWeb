@@ -34,6 +34,7 @@ ALTER TABLE "USUARIO"
 COMMENT ON TABLE "USUARIO"
   IS 'Tabela com os registros dos usuários';
 
+
 --TABELA ARTISTA
 CREATE TABLE "ARTISTA"
 (
