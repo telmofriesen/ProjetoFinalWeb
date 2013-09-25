@@ -1,41 +1,45 @@
+﻿--TABELA USUARIO 
+--DROP TABLE "usuario";
+--DROP TABLE "USUARIO";
+CREATE TABLE "usuario"
+(
+  nome text,
+  email text NOT NULL,
+  senha text,
+  CONSTRAINT "usuario_pkey" PRIMARY KEY (email )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "usuario"
+  OWNER TO admin;
+COMMENT ON TABLE "usuario"
+  IS 'Tabela com os registros dos usuários';
+
 --TABELA PERFIL
-DROP TABLE "PERFIL";
-CREATE TABLE "PERFIL"
+--DROP TABLE "PERFIL";
+--DROP TABLE "perfil";
+CREATE TABLE "perfil"
 (
   papel text NOT NULL,
   email text NOT NULL,
-  CONSTRAINT "PERFIL_pkey" PRIMARY KEY (papel , email ),
-  CONSTRAINT "PERFIL_email_fkey" FOREIGN KEY (email)
-      REFERENCES "USUARIO" (email) MATCH SIMPLE
+  CONSTRAINT "perfil_pkey" PRIMARY KEY (papel , email ),
+  CONSTRAINT "perfil_email_fkey" FOREIGN KEY (email)
+      REFERENCES "usuario" (email) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE "PERFIL"
+ALTER TABLE "perfil"
   OWNER TO admin;
-COMMENT ON TABLE "PERFIL"
+COMMENT ON TABLE "perfil"
   IS 'Tabela com os perfis de usuarios';
 
---TABELA USUARIO 
-DROP TABLE "USUARIO";
-CREATE TABLE "USUARIO"
-(
-  nome text,
-  email text NOT NULL,
-  senha text,
-  CONSTRAINT "USUARIO_pkey" PRIMARY KEY (email )
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE "USUARIO"
-  OWNER TO admin;
-COMMENT ON TABLE "USUARIO"
-  IS 'Tabela com os registros dos usuários';
-
 --TABELA ARTISTA
-CREATE TABLE "ARTISTA"
+--DROP TABLE "ARTISTA";
+--DROP TABLE "artista";
+CREATE TABLE "artista"
 (
   codigo integer NOT NULL DEFAULT nextval('seq_codigo_artista'::regclass),
   nome text,
@@ -44,32 +48,36 @@ CREATE TABLE "ARTISTA"
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE "ARTISTA"
+ALTER TABLE "artista"
   OWNER TO admin;
-COMMENT ON TABLE "ARTISTA"
+COMMENT ON TABLE "artista"
   IS 'Tabela com os artistas';
 
- --TABELA ALBUM
-CREATE TABLE "ALBUM"
+--TABELA ALBUM
+--DROP TABLE "ALBUM";
+--DROP TABLE "album";
+CREATE TABLE "album"
 (
   codigo integer NOT NULL DEFAULT nextval('seq_codigo_album'::regclass),
   titulo text,
   codigo_artista integer,
   CONSTRAINT pk_album PRIMARY KEY (codigo),
   CONSTRAINT fk_album_artista FOREIGN KEY (codigo_artista)
-      REFERENCES "ARTISTA" (codigo) MATCH SIMPLE
+      REFERENCES "artista" (codigo) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE "ALBUM"
+ALTER TABLE "album"
   OWNER TO admin;
-COMMENT ON TABLE "ALBUM"
+COMMENT ON TABLE "album"
   IS 'Tabela com os albuns dos artistas';
 
 --TABELA FAIXA
-CREATE TABLE "FAIXA"
+--DROP TABLE "FAIXA";
+--DROP TABLE "faixa";
+CREATE TABLE "faixa"
 (
   codigo integer NOT NULL,
   numero integer,
@@ -78,13 +86,13 @@ CREATE TABLE "FAIXA"
   codigo_album integer,
   CONSTRAINT fk_faixa PRIMARY KEY (codigo),
   CONSTRAINT fk_faixa_album FOREIGN KEY (codigo_album)
-      REFERENCES "ALBUM" (codigo) MATCH SIMPLE
+      REFERENCES "album" (codigo) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE "FAIXA"
+ALTER TABLE "faixa"
   OWNER TO admin;
-COMMENT ON TABLE "FAIXA"
+COMMENT ON TABLE "faixa"
   IS 'Tabela com as faixas dos álbuns';
