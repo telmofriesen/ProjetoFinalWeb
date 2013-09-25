@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="./WEB-INF/templates/layout2.xhtml">
+
+    <ui:define name="styles">
+        <style type="text/css">
+            .titulo-form {
+                font-size: 14pt;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+            .iceOutLbl {
+                display: inline-block;
+                margin-left: 4px;
+                width: 50px;
+            }
+            
+            .icePnlGrp {
+                margin-top: 4px;
+            }
+        </style>
+    </ui:define>
+    
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+    <ui:define name="content">
+
+        <form method="POST" action="j_security_check">
+            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+                <ice:outputLabel for="j_username" value="Login"/>
+                <ice:inputText id="j_username" size="50"
+                     styleClass="ui-inputfield" label="Login" maxlength="50"/>
+            </ice:panelGroup>
+            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+                <ice:outputLabel for="j_password" value="Password"/>
+                <ice:inputSecret id="j_password" size="50"
+                     styleClass="ui-inputfield" label="Password" maxlength="50"/>
+            </ice:panelGroup>
+            <input type="submit" style="text-align: left; margin-bottom: 10px;" value="Continuar" />
+        </form>
+
+    </ui:define>
+
+</ui:composition>

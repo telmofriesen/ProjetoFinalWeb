@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/inscricao-jsf-2">
+    <Resource auth="Container"
+        name="jdbc/exemplo-jsf"
+        type="javax.sql.DataSource"
+        driverClassName="org.postgresql.Driver" 
+        url="jdbc:postgresql://localhost:5432/inscricao"
+        username="postgres"
+        password="password"
+        maxActive="5"
+        maxIdle="3"
+        maxWait="10000"
+        removeAbandoned="true"
+        logAbandoned="true"         />
+    
+    <Realm className="org.apache.catalina.realm.JDBCRealm" 
+         driverName="org.postgresql.Driver"
+         connectionURL="jdbc:postgresql://localhost:5432/inscricao"
+         userTable="usuarios" userNameCol="login" userCredCol="senha"
+         connectionPassword="password" 
+         connectionName="postgres"
+         userRoleTable="roles" roleNameCol="role"/>
+</Context>
