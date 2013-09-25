@@ -5,39 +5,50 @@
 package musicmate.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author telmo
+ * @author johntheo
  */
 @Entity
-@Table(name="artista")
+@Table(name = "ALBUM")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Artista.findAll", query = "SELECT e FROM Artista e")})
-public class Album implements Serializable{
+    @NamedQuery(name = "Album.findAll", query = "SELECT a FROM Album a"),
+    @NamedQuery(name = "Album.findByCodigo", query = "SELECT a FROM Album a WHERE a.codigo = :codigo"),
+    @NamedQuery(name = "Album.findByTitulo", query = "SELECT a FROM Album a WHERE a.titulo = :titulo")})
+public class Album implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "codigo")
     private Integer codigo;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "nome")
-    private String nome;
-    
+    @Size(max = 2147483647)
+    @Column(name = "titulo")
+    private String titulo;
+    @OneToMany(mappedBy = "codigoAlbum")
+    private Collection<Faixa> faixaCollection;
+    @JoinColumn(name = "codigo_artista", referencedColumnName = "codigo")
+    @ManyToOne
+    private Artista codigoArtista;
+
     public Album() {
     }
 
@@ -45,12 +56,6 @@ public class Album implements Serializable{
         this.codigo = codigo;
     }
 
-    public Album(Integer codigo, String nome) {
-        this.codigo = codigo;
-        this.nome = nome;
-    }
-    
-    
     public Integer getCodigo() {
         return codigo;
     }
@@ -59,21 +64,38 @@ public class Album implements Serializable{
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
-    
+
+    @XmlTransient
+    public Collection<Faixa> getFaixaCollection() {
+        return faixaCollection;
+    }
+
+    public void setFaixaCollection(Collection<Faixa> faixaCollection) {
+        this.faixaCollection = faixaCollection;
+    }
+
+    public Artista getCodigoArtista() {
+        return codigoArtista;
+    }
+
+    public void setCodigoArtista(Artista codigoArtista) {
+        this.codigoArtista = codigoArtista;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -89,6 +111,7 @@ public class Album implements Serializable{
 
     @Override
     public String toString() {
-        return "musicmatepersistence.entity.Artista[ codigo=" + codigo + " ]";
+        return "musicmate.persistence.entity.Album[ codigo=" + codigo + " ]";
     }
+    
 }
