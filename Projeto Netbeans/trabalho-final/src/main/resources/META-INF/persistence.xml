@@ -3,16 +3,15 @@
   <persistence-unit name="InscricaoPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>java:/comp/env/jdbc/exemplo-jsf</non-jta-data-source>
-    <class>inscricao.persistence.entity.Estado</class>
-    <class>inscricao.persistence.entity.Regiao</class>
-    <class>inscricao.persistence.entity.Revendedor</class>
+    <class>musicmatepersistence.entity.Artista</class>
+    
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="hibernate.cache.use_second_level_cache" value="true"/>
       <property name="hibernate.cache.use_query_cache" value="true"/>
       <!--<property name="hibernate.cache.region.provider_class" value="org.hibernate.cache.EhCacheProvider"/>-->
-<!-- old      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>-->
+      <!-- old      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>-->
       <!--<property name="hibernate.cache.region.provider_class" value="net.sf.ehcache.hibernate.EhCacheProvider"/>-->
       <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
       <property name="hibernate.show_sql" value="true"/>

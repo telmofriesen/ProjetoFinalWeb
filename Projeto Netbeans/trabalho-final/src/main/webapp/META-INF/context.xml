@@ -4,9 +4,9 @@
         name="jdbc/exemplo-jsf"
         type="javax.sql.DataSource"
         driverClassName="org.postgresql.Driver" 
-        url="jdbc:postgresql://localhost:5432/inscricao"
+        url="jdbc:postgresql://localhost:5432/musicmate"
         username="postgres"
-        password="password"
+        password="postgres"
         maxActive="5"
         maxIdle="3"
         maxWait="10000"
@@ -15,9 +15,9 @@
     
     <Realm className="org.apache.catalina.realm.JDBCRealm" 
          driverName="org.postgresql.Driver"
-         connectionURL="jdbc:postgresql://localhost:5432/inscricao"
-         userTable="usuarios" userNameCol="login" userCredCol="senha"
-         connectionPassword="password" 
-         connectionName="postgres"
+         connectionURL="jdbc:postgresql://localhost:5432/musicmate"
+         userTable="usuario" userNameCol="login" userCredCol="senha"
+         connectionPassword="admin" 
+         connectionName="admin"
          userRoleTable="roles" roleNameCol="role"/>
 </Context>
