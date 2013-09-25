@@ -4,7 +4,11 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>java:/comp/env/jdbc/exemplo-jsf</non-jta-data-source>
     <class>musicmatepersistence.entity.Artista</class>
-    
+    <class>musicmate.persistence.entity.Usuario</class>
+    <class>musicmate.persistence.entity.Artista</class>
+    <class>musicmate.persistence.entity.Album</class>
+    <class>musicmate.persistence.entity.Faixa</class>
+    <class>musicmate.persistence.entity.Perfil</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
