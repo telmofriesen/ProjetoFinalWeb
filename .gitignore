@@ -1,2 +1,4 @@
 /Projeto Netbeans/trabalho-final/target/
 Projeto Netbeans/trabalho-final/src/main/resources/META-INF/persistence.xml
+
+*.class
