@@ -5,8 +5,8 @@
         type="javax.sql.DataSource"
         driverClassName="org.postgresql.Driver" 
         url="jdbc:postgresql://localhost:5432/musicmate"
-        username="postgres"
-        password="postgres"
+        username="admin"
+        password="admin"
         maxActive="5"
         maxIdle="3"
         maxWait="10000"
@@ -16,8 +16,8 @@
     <Realm className="org.apache.catalina.realm.JDBCRealm" 
          driverName="org.postgresql.Driver"
          connectionURL="jdbc:postgresql://localhost:5432/musicmate"
-         userTable="usuario" userNameCol="login" userCredCol="senha"
+         userTable="usuario" userNameCol="email" userCredCol="senha"
          connectionPassword="admin" 
          connectionName="admin"
-         userRoleTable="roles" roleNameCol="role"/>
+         userRoleTable="perfil" roleNameCol="papel"/>
 </Context>

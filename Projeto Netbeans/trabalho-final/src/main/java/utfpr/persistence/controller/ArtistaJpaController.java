@@ -5,10 +5,15 @@
 package utfpr.persistence.controller;
 
 //import inscricao.persistence.entity.Idioma;
-import musicmate.persistence.entity.Artista;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import musicmate.persistence.entity.*;
+
 
 /**
  *
@@ -38,9 +43,14 @@ public class ArtistaJpaController extends JpaController {
         try {
             em = getEntityManager();
         
+            // API criterios
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Artista> cq = cb.createQuery(Artista.class);
+            Root<Artista> rt = cq.from(Artista.class);
+            TypedQuery<Artista> q = em.createQuery(cq);
             // JPQL
             // select c from Candidato c where c.idioma = :idioma order by c.nome
-            TypedQuery<Artista> q = em.createQuery("SELECT * FROM Artista", Artista.class);
+            // TypedQuery<Artista> q = em.createNamedQuery("Artista.findAll", Artista.class);
             List<Artista> artistas = q.getResultList();
 
             return artistas;
@@ -49,7 +59,25 @@ public class ArtistaJpaController extends JpaController {
         }
     }
 
-    public int findArtistasByNome(String filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Artista> findArtistasByNome(String filtro) {
+        EntityManager em = null;        
+        try {
+            em = getEntityManager();
+
+            // API criterios
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Artista> cq = cb.createQuery(Artista.class);
+            Root<Artista> rt = cq.from(Artista.class);
+            cq.select(rt).where(cb.like(rt.get(Artista_.nome), "%"+filtro+"%"));
+            TypedQuery<Artista> q = em.createQuery(cq);
+            // JPQL
+            // TypedQuery<Artista> q = em.createQuery("SELECT a FROM Artista a WHERE a.nome LIKE :filtro", Artista.class);
+            // q.setParameter("filtro", "%"+ filtro +"%");
+            ArrayList<Artista> artistas = (ArrayList<Artista>) q.getResultList();
+
+            return artistas;
+        } finally {
+            if (em != null) em.close();
+        }
     }
 }

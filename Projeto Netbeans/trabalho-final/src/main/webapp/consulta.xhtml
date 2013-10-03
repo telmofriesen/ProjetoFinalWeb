@@ -50,41 +50,25 @@
             </ice:panelGroup>
             <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
                 <ice:dataTable 
-                    value="#{consultaBean.revendedoresDataModel}"
-                    var="revendedor"
+                    value="#{consultaBean.artistasDataModel}"
+                    var="artista"
                     >
                     
                     <ice:column>
                         <f:facet name="header">
-                            <ice:commandSortHeader columnName="cnpj">
-                               CNPJ
+                            <ice:commandSortHeader columnName="nome">
+                               Nome
                             </ice:commandSortHeader>
                         </f:facet>
-                        #{revendedor.cnpj}
+                        #{artista.nome}
                     </ice:column>
                     <ice:column>
                         <f:facet name="header">
-                            <ice:commandSortHeader columnName="nomeFantasia">
-                               Nome Fantasia
+                            <ice:commandSortHeader columnName="codigo">
+                               Código
                             </ice:commandSortHeader>
                         </f:facet>
-                        #{revendedor.nomeFantasia}
-                    </ice:column>
-                    <ice:column>
-                        <f:facet name="header">
-                            <ice:commandSortHeader columnName="cidade">
-                               Cidade
-                            </ice:commandSortHeader>
-                        </f:facet>
-                        #{revendedor.cidade}
-                    </ice:column>
-                    <ice:column>
-                        <f:facet name="header">
-                            <ice:commandSortHeader columnName="estado">
-                               Estado
-                            </ice:commandSortHeader>
-                        </f:facet>
-                        #{revendedor.estadoDeAtuacao.descricao}
+                        #{artista.codigo}
                     </ice:column>
                 </ice:dataTable> 
             </h:panelGroup>

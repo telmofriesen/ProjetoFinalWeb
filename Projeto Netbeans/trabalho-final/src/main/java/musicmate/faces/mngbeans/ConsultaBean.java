@@ -5,10 +5,12 @@
 package musicmate.faces.mngbeans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.ListDataModel;
+import musicmate.persistence.entity.Album;
 import musicmate.persistence.entity.Artista;
 import utfpr.faces.support.PageBean;
 import utfpr.persistence.controller.ArtistaJpaController;
@@ -29,8 +31,17 @@ public class ConsultaBean extends PageBean {
     public ConsultaBean() {
         
         ArtistaJpaController ajc = new ArtistaJpaController();
-        artistas = new ArrayList(ajc.findArtistas());
+        
+        // tests
+        //Artista a = new Artista();
+        //a.setNome("seis são loco");
+        //a.setAlbumCollection(new ArrayList<Album>());
+        //ajc.persist(a);
+        
+//        artistas = new ArrayList(ajc.findArtistas());
+        artistas = ajc.findArtistasByNome("seis");
         artistasDataModel = new ListDataModel<>(artistas);
+        
     }
 
     public ListDataModel<Artista> getArtistasDataModel() {
