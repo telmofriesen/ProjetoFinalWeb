@@ -18,3 +18,13 @@ CREATE SEQUENCE seq_codigo_album
   CACHE 1;
 ALTER TABLE seq_codigo_album
   OWNER TO admin;
+
+--SEQUENCE USUARIO
+CREATE SEQUENCE seq_codigo_usuario
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_codigo_usuario
+  OWNER TO admin;

@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author johntheo
+ * @author telmo
  */
 @Entity
 @Table(name = "faixa")
@@ -45,6 +45,9 @@ public class Faixa implements Serializable {
     private String titulo;
     @Column(name = "duracao")
     private Integer duracao;
+    @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Usuario codigoUsuario;
     @JoinColumn(name = "codigo_album", referencedColumnName = "codigo")
     @ManyToOne
     private Album codigoAlbum;
@@ -86,6 +89,14 @@ public class Faixa implements Serializable {
 
     public void setDuracao(Integer duracao) {
         this.duracao = duracao;
+    }
+
+    public Usuario getCodigoUsuario() {
+        return codigoUsuario;
+    }
+
+    public void setCodigoUsuario(Usuario codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     public Album getCodigoAlbum() {

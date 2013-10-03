@@ -9,8 +9,6 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,13 +16,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johntheo
+ * @author telmo
  */
 @Entity
 @Table(name = "album")
@@ -36,18 +35,21 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Album implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "codigo")
     private Integer codigo;
     @Size(max = 2147483647)
     @Column(name = "titulo")
     private String titulo;
-    @OneToMany(mappedBy = "codigoAlbum")
-    private Collection<Faixa> faixaCollection;
+    @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Usuario codigoUsuario;
     @JoinColumn(name = "codigo_artista", referencedColumnName = "codigo")
     @ManyToOne
     private Artista codigoArtista;
+    @OneToMany(mappedBy = "codigoAlbum")
+    private Collection<Faixa> faixaCollection;
 
     public Album() {
     }
@@ -72,13 +74,12 @@ public class Album implements Serializable {
         this.titulo = titulo;
     }
 
-    @XmlTransient
-    public Collection<Faixa> getFaixaCollection() {
-        return faixaCollection;
+    public Usuario getCodigoUsuario() {
+        return codigoUsuario;
     }
 
-    public void setFaixaCollection(Collection<Faixa> faixaCollection) {
-        this.faixaCollection = faixaCollection;
+    public void setCodigoUsuario(Usuario codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     public Artista getCodigoArtista() {
@@ -87,6 +88,15 @@ public class Album implements Serializable {
 
     public void setCodigoArtista(Artista codigoArtista) {
         this.codigoArtista = codigoArtista;
+    }
+
+    @XmlTransient
+    public Collection<Faixa> getFaixaCollection() {
+        return faixaCollection;
+    }
+
+    public void setFaixaCollection(Collection<Faixa> faixaCollection) {
+        this.faixaCollection = faixaCollection;
     }
 
     @Override

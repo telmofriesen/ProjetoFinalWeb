@@ -5,10 +5,14 @@
 package utfpr.persistence.controller;
 
 //import inscricao.persistence.entity.Idioma;
-import musicmate.persistence.entity.Perfil;
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import musicmate.persistence.entity.*;
 
 /**
  *
@@ -47,9 +51,5 @@ public class PerfilJpaController extends JpaController {
         } finally {
             if (em != null) em.close();
         }
-    }
-
-    public int findPerfisByNome(String filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

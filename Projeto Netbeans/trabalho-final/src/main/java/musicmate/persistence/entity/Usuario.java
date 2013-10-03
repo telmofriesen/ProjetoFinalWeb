@@ -5,22 +5,24 @@
 package musicmate.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johntheo
+ * @author telmo
  */
 @Entity
 @Table(name = "usuario")
@@ -42,21 +44,33 @@ public class Usuario implements Serializable {
     @Column(name = "nome")
     private String nome;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 2147483647)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2147483647)
     @Column(name = "email")
     private String email;
     @Size(max = 2147483647)
     @Column(name = "senha")
     private String senha;
-    @JoinColumn(name = "codigo_perfil", referencedColumnName = "codigo")
-    @ManyToOne
-    private Perfil codigoPerfil;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private Collection<Album> albumCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private Collection<Faixa> faixaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<Perfil> perfilCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private Collection<Artista> artistaCollection;
 
     public Usuario() {
     }
 
     public Usuario(Integer codigo) {
         this.codigo = codigo;
+    }
+
+    public Usuario(Integer codigo, String email) {
+        this.codigo = codigo;
+        this.email = email;
     }
 
     public Integer getCodigo() {
@@ -91,12 +105,40 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Perfil getCodigoPerfil() {
-        return codigoPerfil;
+    @XmlTransient
+    public Collection<Album> getAlbumCollection() {
+        return albumCollection;
     }
 
-    public void setCodigoPerfil(Perfil codigoPerfil) {
-        this.codigoPerfil = codigoPerfil;
+    public void setAlbumCollection(Collection<Album> albumCollection) {
+        this.albumCollection = albumCollection;
+    }
+
+    @XmlTransient
+    public Collection<Faixa> getFaixaCollection() {
+        return faixaCollection;
+    }
+
+    public void setFaixaCollection(Collection<Faixa> faixaCollection) {
+        this.faixaCollection = faixaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Perfil> getPerfilCollection() {
+        return perfilCollection;
+    }
+
+    public void setPerfilCollection(Collection<Perfil> perfilCollection) {
+        this.perfilCollection = perfilCollection;
+    }
+
+    @XmlTransient
+    public Collection<Artista> getArtistaCollection() {
+        return artistaCollection;
+    }
+
+    public void setArtistaCollection(Collection<Artista> artistaCollection) {
+        this.artistaCollection = artistaCollection;
     }
 
     @Override

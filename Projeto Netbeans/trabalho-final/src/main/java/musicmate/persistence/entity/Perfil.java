@@ -5,81 +5,65 @@
 package musicmate.persistence.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johntheo
+ * @author telmo
  */
 @Entity
 @Table(name = "perfil")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
-    @NamedQuery(name = "Perfil.findByCodigo", query = "SELECT p FROM Perfil p WHERE p.codigo = :codigo"),
-    @NamedQuery(name = "Perfil.findByDescricao", query = "SELECT p FROM Perfil p WHERE p.descricao = :descricao")})
+    @NamedQuery(name = "Perfil.findByPapel", query = "SELECT p FROM Perfil p WHERE p.perfilPK.papel = :papel"),
+    @NamedQuery(name = "Perfil.findByEmail", query = "SELECT p FROM Perfil p WHERE p.perfilPK.email = :email")})
 public class Perfil implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "codigo")
-    private Integer codigo;
-    @Size(max = 2147483647)
-    @Column(name = "descricao")
-    private String descricao;
-    @OneToMany(mappedBy = "codigoPerfil")
-    private Collection<Usuario> usuarioCollection;
+    @EmbeddedId
+    protected PerfilPK perfilPK;
+    @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public Perfil() {
     }
 
-    public Perfil(Integer codigo) {
-        this.codigo = codigo;
+    public Perfil(PerfilPK perfilPK) {
+        this.perfilPK = perfilPK;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public Perfil(String papel, String email) {
+        this.perfilPK = new PerfilPK(papel, email);
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public PerfilPK getPerfilPK() {
+        return perfilPK;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setPerfilPK(PerfilPK perfilPK) {
+        this.perfilPK = perfilPK;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigo != null ? codigo.hashCode() : 0);
+        hash += (perfilPK != null ? perfilPK.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +74,7 @@ public class Perfil implements Serializable {
             return false;
         }
         Perfil other = (Perfil) object;
-        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
+        if ((this.perfilPK == null && other.perfilPK != null) || (this.perfilPK != null && !this.perfilPK.equals(other.perfilPK))) {
             return false;
         }
         return true;
@@ -98,7 +82,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "musicmate.persistence.entity.Perfil[ codigo=" + codigo + " ]";
+        return "musicmate.persistence.entity.Perfil[ perfilPK=" + perfilPK + " ]";
     }
     
 }

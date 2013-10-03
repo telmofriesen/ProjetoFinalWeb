@@ -9,20 +9,21 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johntheo
+ * @author telmo
  */
 @Entity
 @Table(name = "artista")
@@ -34,8 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Artista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "codigo")
     private Integer codigo;
     @Size(max = 2147483647)
@@ -43,6 +44,9 @@ public class Artista implements Serializable {
     private String nome;
     @OneToMany(mappedBy = "codigoArtista")
     private Collection<Album> albumCollection;
+    @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Usuario codigoUsuario;
 
     public Artista() {
     }
@@ -74,6 +78,14 @@ public class Artista implements Serializable {
 
     public void setAlbumCollection(Collection<Album> albumCollection) {
         this.albumCollection = albumCollection;
+    }
+
+    public Usuario getCodigoUsuario() {
+        return codigoUsuario;
+    }
+
+    public void setCodigoUsuario(Usuario codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     @Override
