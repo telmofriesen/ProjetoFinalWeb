@@ -5,7 +5,13 @@
       xmlns:ice="http://www.icesoft.com/icefaces/component"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
-
+    <ui:define name="styles">
+        <style type="text/css">  
+            .conteudo {
+                margin-top: 4em
+            }
+        </style>
+    </ui:define>
     <f:view>
         <ice:loadBundle basename="inscricao.config.version" var="versao"/>
         <ui:insert name="metadata"/>
@@ -14,6 +20,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
+            <link href="./css/styles.css" rel="stylesheet" type="text/css" media="screen"/>
             <title>MusicMate - Seu parceiro musical</title>
         </h:head>
 

@@ -18,10 +18,12 @@
                 display: inline-block;
                 margin-left: 4px;
                 width: 50px;
-            }
-            
+            }            
             .icePnlGrp {
                 margin-top: 4px;
+            }
+            .form {
+                padding-top: 60px;
             }
         </style>
     </ui:define>
@@ -33,8 +35,8 @@
     </ui:define>
 
     <ui:define name="content">
-        <ice:form>
-            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+        <ice:form style="text-align: left; margin-bottom: 10px; padding-top: 100px">
+            <ice:panelGroup style="text-align: left; margin-bottom: 10px; padding-top: 100px">
                 <ice:outputLabel for="cnpj" value="CNPJ"/>
                 <ace:maskedEntry id="cnpj" value="#{cadastroBean.revendedor.cnpj}"  mask="99.999.999/9999-99"
                              label="CNPJ" size="15" required="true">
@@ -111,5 +113,4 @@
             <ice:commandButton value="Continuar" action="#{cadastroBean.cadastroAction}" style="margin-top: 1em"/>
         </ice:form>
     </ui:define>
-
 </ui:composition>
