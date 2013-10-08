@@ -33,21 +33,11 @@
     </ui:define>
 
     <ui:define name="content">
-
-        <form method="POST" action="j_security_check">
-            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
-                <ice:outputLabel for="j_username" value="Login"/>
-                <ice:inputText id="j_username" size="50"
-                     styleClass="ui-inputfield" label="Login" maxlength="50"/>
-            </ice:panelGroup>
-            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
-                <ice:outputLabel for="j_password" value="Password"/>
-                <ice:inputSecret id="j_password" size="50"
-                     styleClass="ui-inputfield" label="Password" maxlength="50"/>
-            </ice:panelGroup>
-            <input type="submit" style="text-align: left; margin-bottom: 10px;" value="Continuar" />
+        <form id="slick-login" method="POST" action="j_security_check">
+            <label for="login">login</label><input id="j_username" type="text" name="login" class="placeholder" placeholder="email"/>
+            <label for="password">password</label><input id="j_password" type="password" name="password" class="placeholder" placeholder="password"/>
+            <input type="submit" value="Logar"/>
         </form>
-
     </ui:define>
 
 </ui:composition>

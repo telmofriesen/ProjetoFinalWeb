@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <description>Exemplo de um formulário em JSF</description>
-    <display-name>Exemplo de Formulário JSF</display-name>
+    <description>Projeto Final Web</description>
+    <display-name>Projeto Final Web</display-name>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Production</param-value>
@@ -48,9 +48,9 @@
         <session-timeout>20</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>consulta.xhtml</welcome-file>
+        <welcome-file>inicial.xhtml</welcome-file>
     </welcome-file-list>
-    <security-constraint>
+    <!--<security-constraint>
         <display-name>Cadastro</display-name>
         <web-resource-collection>
             <web-resource-name>Cadastro</web-resource-name>
@@ -59,21 +59,9 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>Consulta</display-name>
-        <web-resource-collection>
-            <web-resource-name>Consulta</web-resource-name>
-            <description/>
-            <url-pattern>/consulta.xhtml</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
             <role-name>user</role-name>
         </auth-constraint>
-    </security-constraint>
+    </security-constraint>-->
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>Login</realm-name>

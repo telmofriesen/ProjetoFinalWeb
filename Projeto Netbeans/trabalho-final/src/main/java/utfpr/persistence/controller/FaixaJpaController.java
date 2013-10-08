@@ -74,4 +74,26 @@ public class FaixaJpaController extends JpaController {
             if (em != null) em.close();
         }
     }
+    
+    public ArrayList<Faixa> findFaixasByAlbum(int filtro) {
+        EntityManager em = null;        
+        try {
+            em = getEntityManager();
+
+            // API criterios
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Faixa> cq = cb.createQuery(Faixa.class);
+            Root<Faixa> rt = cq.from(Faixa.class);
+            //cq.select(rt).where(cb.like(rt.get(Faixa_.titulo), "%"+filtro+"%"));
+            //TypedQuery<Faixa> q = em.createQuery(cq);
+            // JPQL
+             TypedQuery<Faixa> q = em.createQuery("SELECT f FROM Faixa f WHERE f.codigo_album =:filtro", Faixa.class);
+             q.setParameter("filtro", filtro);
+            ArrayList<Faixa> faixas = (ArrayList<Faixa>) q.getResultList();
+
+            return faixas;
+        } finally {
+            if (em != null) em.close();
+        }
+    }
 }

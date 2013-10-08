@@ -78,4 +78,26 @@ public class AlbumJpaController extends JpaController {
             if (em != null) em.close();
         }
     }
+    
+    public List<Album> findAlbunsByArtista(int filtro) {
+        EntityManager em = null;        
+        try {
+            em = getEntityManager();
+
+            // API criterios
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Album> cq = cb.createQuery(Album.class);
+            Root<Album> rt = cq.from(Album.class);
+            //cq.select(rt).where(cb.like(rt.get(Album_.codigoArtista), "%"+filtro+"%"));
+            //TypedQuery<Album> q = em.createQuery(cq);
+            // JPQL
+            TypedQuery<Album> q = em.createQuery("SELECT a FROM Album a WHERE a.codigo_artista =:filtro", Album.class);
+            q.setParameter("filtro", filtro);
+            List<Album> albuns = q.getResultList();
+
+            return albuns;
+        } finally {
+            if (em != null) em.close();
+        }
+    }
 }

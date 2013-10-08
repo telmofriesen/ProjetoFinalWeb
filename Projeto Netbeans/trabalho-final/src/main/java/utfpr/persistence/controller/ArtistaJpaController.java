@@ -47,13 +47,40 @@ public class ArtistaJpaController extends JpaController {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Artista> cq = cb.createQuery(Artista.class);
             Root<Artista> rt = cq.from(Artista.class);
-            TypedQuery<Artista> q = em.createQuery(cq);
+            //TypedQuery<Artista> q = em.createQuery(cq);
             // JPQL
             // select c from Candidato c where c.idioma = :idioma order by c.nome
-            // TypedQuery<Artista> q = em.createNamedQuery("Artista.findAll", Artista.class);
+            TypedQuery<Artista> q = em.createNamedQuery("Artista.findAll", Artista.class);
             List<Artista> artistas = q.getResultList();
 
             return artistas;
+        } finally {
+            if (em != null) em.close();
+        }
+    }
+    
+    public int proxId(){
+        EntityManager em = null;        
+        try {
+            em = getEntityManager();
+        
+            // API criterios
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Artista> cq = cb.createQuery(Artista.class);
+            Root<Artista> rt = cq.from(Artista.class);
+            //TypedQuery<Artista> q = em.createQuery(cq);
+            // JPQL
+            // select c from Candidato c where c.idioma = :idioma order by c.nome
+            TypedQuery<Artista> q = em.createNamedQuery("Artista.findAll", Artista.class);
+            List<Artista> artistas = q.getResultList();
+
+            int id = 0;
+            for(Artista a : artistas){
+                if(a.getCodigo() > id){
+                    id = a.getCodigo();
+                }
+            }
+            return id+1;
         } finally {
             if (em != null) em.close();
         }
