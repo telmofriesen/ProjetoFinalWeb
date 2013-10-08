@@ -5,20 +5,13 @@
 package musicmate.faces.mngbeans;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.ListDataModel;
-import javax.servlet.http.HttpServletRequest;
-import musicmate.persistence.entity.Album;
 import musicmate.persistence.entity.Artista;
-import musicmate.persistence.entity.Usuario;
 import utfpr.faces.support.PageBean;
 import utfpr.persistence.controller.ArtistaJpaController;
-import utfpr.persistence.controller.UsuarioJpaController;
-
 
 /**
  *

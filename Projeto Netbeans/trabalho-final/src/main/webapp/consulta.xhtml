@@ -33,47 +33,61 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form>
-            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
-                <ice:outputLabel for="busca" value="Pesquisar:"/>
-                <ice:inputText id="busca"
-                               value="#{consultaBean.busca}"
-                               size="40"
-                               styleClass="ui-inputfield"
-                               label="Pesquisar"
-                               maxlength="100"
-                               required="false"
-                               valueChangeListener="#{consultaBean.buscaTextChanged}" 
-                               partialSubmit="true"
-                               />
-                
-            </ice:panelGroup>
-            <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
-                <ice:dataTable 
-                    value="#{consultaBean.artistasDataModel}"
-                    var="artista"
-                    >
-                    
-                    <ice:column>
-                        <f:facet name="header">
-                            <ice:commandSortHeader columnName="nome">
-                               Nome
-                            </ice:commandSortHeader>
-                        </f:facet>
-                        #{artista.nome}
-                    </ice:column>
-                    <ice:column>
-                        <f:facet name="header">
-                            <ice:commandSortHeader columnName="codigo">
-                               Código
-                            </ice:commandSortHeader>
-                        </f:facet>
-                        #{artista.codigo}
-                    </ice:column>
-                </ice:dataTable> 
-            </h:panelGroup>
-            <h:messages/>
-        </h:form>
+        <div class="conteudo">
+            <h:form>
+                <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+                    <ice:outputLabel style="width: 75px" for="busca" value="Pesquisar:"/>
+                    <ice:inputText id="busca"
+                                   value="#{consultaBean.busca}"
+                                   size="40"
+                                   styleClass="ui-inputfield"
+                                   label="Pesquisar"
+                                   maxlength="100"
+                                   required="false"
+                                   valueChangeListener="#{consultaBean.buscaTextChanged}" 
+                                   partialSubmit="true"
+                                   />
+                </ice:panelGroup>                
+                <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
+                    <ice:dataTable rows="30" value="#{consultaBean.artistasDataModel}" var="artista">
+                        <ice:column>
+                            <f:facet name="header">
+                                <ice:commandSortHeader columnName="nome">
+                                   Nome
+                                </ice:commandSortHeader>
+                            </f:facet>
+                            #{artista.nome}
+                        </ice:column>
+                        <ice:column>
+                            <f:facet name="header">
+                                <ice:commandSortHeader columnName="codigo">
+                                   Código
+                                </ice:commandSortHeader>
+                            </f:facet>
+                            #{artista.codigo}
+                        </ice:column>
+                    </ice:dataTable> 
+                </h:panelGroup>                
+                <h:messages/>
+            </h:form>
+            <h:form>
+                <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
+                    <ace:dataTable 
+                        paginator="true"
+                        rows="10"
+                        value="#{consultaBean.artistasDataModel}"
+                        var="artista"
+                        >
+                        <ace:column id="codigo" headerText="Codigo">
+                            <h:outputText id="numeroc" value="#{artista.codigo}"/>
+                        </ace:column>
+                        <ace:column id="nome" headerText="Nome" sortBy="#{artista.nome}">
+                            <h:outputText id="nomec" value="#{artista.nome}"/>
+                        </ace:column>
+                    </ace:dataTable> 
+                </h:panelGroup>
+                <h:messages/>
+            </h:form>
+        </div>
     </ui:define>
-
 </ui:composition>

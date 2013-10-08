@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
 import musicmate.persistence.entity.*;
 
 
@@ -94,8 +95,11 @@ public class ArtistaJpaController extends JpaController {
             // API criterios
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Artista> cq = cb.createQuery(Artista.class);
-            Root<Artista> rt = cq.from(Artista.class);
-            cq.select(rt).where(cb.like(rt.get(Artista_.nome), "%"+filtro+"%"));
+            EntityType<Artista> type = em.getMetamodel().entity(Artista.class);
+            Root<Artista> rt = cq.from(Artista.class);            
+            
+            cq.select(rt).where(cb.like(cb.lower(rt.get(type.getDeclaredSingularAttribute("nome", String.class))), "%" + filtro.toLowerCase() + "%"));
+            
             TypedQuery<Artista> q = em.createQuery(cq);
             // JPQL
             // TypedQuery<Artista> q = em.createQuery("SELECT a FROM Artista a WHERE a.nome LIKE :filtro", Artista.class);
