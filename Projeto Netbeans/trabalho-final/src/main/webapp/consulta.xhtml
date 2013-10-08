@@ -70,6 +70,24 @@
                 </h:panelGroup>                
                 <h:messages/>
             </h:form>
+            <h:form>
+                <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
+                    <ace:dataTable 
+                        paginator="true"
+                        rows="10"
+                        value="#{consultaBean.artistasDataModel}"
+                        var="artista"
+                        >
+                        <ace:column id="codigo" headerText="Codigo">
+                            <h:outputText id="numeroc" value="#{artista.codigo}"/>
+                        </ace:column>
+                        <ace:column id="nome" headerText="Nome" sortBy="#{artista.nome}">
+                            <h:outputText id="nomec" value="#{artista.nome}"/>
+                        </ace:column>
+                    </ace:dataTable> 
+                </h:panelGroup>
+                <h:messages/>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>
