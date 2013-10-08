@@ -36,7 +36,7 @@
         <div class="conteudo">
             <h:form>
                 <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
-                    <ice:outputLabel for="busca" value="Pesquisar:"/>
+                    <ice:outputLabel style="width: 75px" for="busca" value="Pesquisar:"/>
                     <ice:inputText id="busca"
                                    value="#{consultaBean.busca}"
                                    size="40"
@@ -47,14 +47,9 @@
                                    valueChangeListener="#{consultaBean.buscaTextChanged}" 
                                    partialSubmit="true"
                                    />
-
-                </ice:panelGroup>
+                </ice:panelGroup>                
                 <h:panelGroup style="text-align: left; margin-bottom: 10px;" layout="block">
-                    <ice:dataTable 
-                        value="#{consultaBean.artistasDataModel}"
-                        var="artista"
-                        >
-
+                    <ice:dataTable rows="30" value="#{consultaBean.artistasDataModel}" var="artista">
                         <ice:column>
                             <f:facet name="header">
                                 <ice:commandSortHeader columnName="nome">
@@ -72,10 +67,9 @@
                             #{artista.codigo}
                         </ice:column>
                     </ice:dataTable> 
-                </h:panelGroup>
+                </h:panelGroup>                
                 <h:messages/>
             </h:form>
         </div>
     </ui:define>
-
 </ui:composition>
