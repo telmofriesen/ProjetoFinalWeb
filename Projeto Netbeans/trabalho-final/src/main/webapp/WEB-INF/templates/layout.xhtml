@@ -12,62 +12,51 @@
         <h:head>
             <ui:insert name="styles"/>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <link rel="stylesheet" type="text/css" href="./xmlhttp/css/rime/rime.css"/>
-            <link href="./css/default.css" rel="stylesheet" type="text/css" />
-            <link href="./css/cssLayout.css" rel="stylesheet" type="text/css" />
-            <link href="./css/inscricao.css" rel="stylesheet" type="text/css" />
-            <title>IF6AE - Ficha de Inscrição v2</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
+            <title>MusicMate - Seu parceiro musical</title>
         </h:head>
 
         <h:body>
             <ui:insert name="javascript"/>
-            <table class="table_layout">
-                <tr>
-                    <td class="left_filler"/>
-                    <td id="top">
-                        <ui:insert name="top">
-                            <a href="http://www.ct.utfpr.edu.br" target="_blank"><img src="imagens/header.jpg" alt=""/></a>
-                        </ui:insert>
-                    </td>
-                    <td class="right_filler"/>
-                </tr>
-                <tr>
-                    <td class="left_filler"/>
-                    <td id="content">
-                        <h:form>
-                            <div class="titulo-form" style="text-align: center">REVENDEDORES</div>
-                            
-                            <h:panelGrid columns="2">
-                                <h:panelGroup layout="block">
-                                    <h:outputLink id="link1" value="cadastro.xhtml">
-                                        <h:outputText value="Cadastro" />
-                                    </h:outputLink>
-                                </h:panelGroup>
-                                <h:panelGroup layout="block">
-                                    <h:outputLink id="link2" value="consulta.xhtml">
-                                        <h:outputText value="Consulta" />
-                                    </h:outputLink>
-                                </h:panelGroup>
-                            </h:panelGrid>
-                        </h:form>
-                        
-                        <ui:insert name="content">Content</ui:insert>
-                    </td>
-                    <td class="right_filler"/>
-                </tr>
-                <tr id="bottom">
-                    <td class="left_filler"/>
-                    <td>
-                        <ui:insert name="bottom">
-                            <div class="bottom_content">
-                                <div>Ficha de Inscrição v#{versao['inscricao.version']} [#{versao['inscricao.buildTimestamp']}] 
-                                </div>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">MusicMate</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#conultar">Consultar</a></li>
+                            <li><a href="#cadastrar">Cadastrar</a></li>
+                        </ul>
+                        <form method="POST" action="j_security_check" class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <!-- <ice:inputText id="j_username" styleClass="form-control" label="Login" maxlength="50" value="Login"/> -->
+                                <input id="j_username" type="text" placeholder="Email" class="form-control"/>
                             </div>
-                        </ui:insert>
-                    </td>
-                    <td class="right_filler"/>
-                </tr>
-            </table>
+                            <div class="form-group">
+                                <!-- <ice:inputSecret id="j_password" styleClass="form-control" label="Password" maxlength="50" value="Senha"/> -->
+                                <input id="j_password" type="password" placeholder="Password" class="form-control"/>
+                            </div>
+                            <!-- <input type="submit" class="btn btn-success" value="Logar" /> -->
+                            <button type="submit" class="btn btn-success">Logar</button>
+                        </form>
+                        
+                    </div><!--/.navbar-collapse -->
+                </div>
+            </div>
+            <ui:insert name="content">
+                <div class="container">Content</div>
+            </ui:insert>
+
+            <h:outputScript library="js" name="jquery.js"/>
+            <h:outputScript library="js" name="bootstrap.min.js"/>
         </h:body>
     </f:view>
 </html>
